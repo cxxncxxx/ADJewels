@@ -297,25 +297,6 @@ footer{text-align:center;padding:20px;color:#666}
   position: relative;
 }
 
-.badge-2x1 {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-
-  background: #000;          /* negro */
-  color: #fff;               /* blanco */
-
-  padding: 6px 12px;
-  font-size: 13px;
-  font-weight: 700;
-  border-radius: 999px;
-
-  box-shadow: 0 4px 12px rgba(0,0,0,.35);
-  z-index: 5;
-
-  letter-spacing: .5px;
-}
-
   .main-img {
   touch-action: pan-y;
   user-select: none;
@@ -425,7 +406,6 @@ const PRODUCTS=[
   id:"jordan-retro-4-white-oreo",
   category:"calzados",
   title:"Jordan Retro 4 White Oreo",
-  promo: "2x1",
   variants:{
    
   "34":140000,
@@ -450,7 +430,6 @@ const PRODUCTS=[
   id:"adidas-forum-low-black-and-white",
   category:"calzados",
   title:"Adidas Forum Low Black and White",
-  promo: "2x1",
   variants:{
    
   "34":140000,
@@ -643,7 +622,6 @@ function render(cat="all"){
     const card=document.createElement("div");
     card.className="card";
     card.innerHTML = `
-  ${p.promo === "2x1" ? `<span class="badge-2x1">2x1</span>` : ""}
 
   <div class="gallery">
     <img src="${p.images[0]}" class="main-img">
