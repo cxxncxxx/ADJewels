@@ -729,9 +729,33 @@ if (p.colors) {
 
     tag.onclick = () => {
 
-      const color = tag.textContent.toLowerCase();
+      const color = tag.textContent;
+
+      console.log("Color clickeado:", color);
+      console.log("Imágenes:", p.colors[color]);
 
       const nuevasImgs = p.colors[color];
+
+      if (!nuevasImgs) return;
+
+      mainImg.src = nuevasImgs[0];
+
+      const thumbs = card.querySelector(".thumbs");
+
+      thumbs.innerHTML = nuevasImgs
+        .map(img => `<img src="${img}">`)
+        .join("");
+
+      thumbs.querySelectorAll("img").forEach(t => {
+        t.onclick = () => {
+          mainImg.src = t.src;
+        };
+      });
+
+    };
+
+  });
+}
 
       if (!nuevasImgs) return;
 
