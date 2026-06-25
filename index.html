@@ -660,36 +660,49 @@ const catalog=document.getElementById("catalog");
 
 function render(cat="all"){
   catalog.innerHTML="";
-  PRODUCTS.filter(p=>cat==="all"||p.category===cat).forEach(p=>{
-    const firstPrice=Object.values(p.variants)[0];
-   const card=document.createElement("div");
-card.className="card";
+  PRODUCTS.filter(p => cat === "all" || p.category === cat).forEach(p => {
 
-card.innerHTML = `
-  <div class="title">${p.title}</div>
+  const firstPrice = Object.values(p.variants)[0];
 
- <div class="colors">
-  ${p.colors
-    ? Object.keys(p.colors).map(c =>
-        `<span class="color-tag">${c}</span>`
-      ).join("")
-    : ""
-  }
-</div>
+  const imgs = p.images || Object.values(p.colors || {}).flat();
 
- <div class="price">
-  ${fmt(Object.values(p.variants)[0])}
-</div>
+  const card = document.createElement("div");
+  card.className = "card";
 
-  <button>Comprar</button>
+  card.innerHTML = `
+    <div class="meta">
 
-  <div class="gallery">
-    <img src="${p.images[0]}" class="main-img">
-    <div class="thumbs">
-      ${p.images.map((img,i)=>`<img src="${img}">`).join("")}
+      <div class="title">${p.title}</div>
+
+      <div class="colors">
+        ${p.colors
+          ? Object.keys(p.colors)
+              .map(c => `<span class="color-tag">${c}</span>`)
+              .join("")
+          : ""
+        }
+      </div>
+
+      <select>
+        ${Object.entries(p.variants)
+          .map(([k,v]) => `<option value="${v}">${k}</option>`)
+          .join("")}
+      </select>
+
+      <div class="price">
+        ${fmt(firstPrice)}
+      </div>
+
     </div>
-  </div>
-`;
+
+    <div class="gallery">
+      <img src="${imgs[0]}" class="main-img">
+
+      <div class="thumbs">
+        ${imgs.map(img => `<img src="${img}">`).join("")}
+      </div>
+    </div>
+  `;
     const mainImg=card.querySelector(".main-img");
     mainImg.onclick = ()=>openProduct(p);
     card.querySelectorAll(".thumbs img").forEach(t=>{
@@ -709,7 +722,7 @@ card.innerHTML = `
     title: p.title,
     variant: sel.options[sel.selectedIndex].text,
     price: sel.value,
-    image: p.images[0] // 👈 CLAVE
+    image: imgs[0] // 👈 CLAVE
   });
   cartTotal += Number(sel.value);
   updateCartUI();
