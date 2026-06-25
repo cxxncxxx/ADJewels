@@ -677,9 +677,9 @@ card.innerHTML = `
   }
 </div>
 
-  <div class="price">
-    ${fmtARS(p.price)}
-  </div>
+ <div class="price">
+  ${fmt(Object.values(p.variants)[0])}
+</div>
 
   <button>Comprar</button>
 
