@@ -757,36 +757,6 @@ if (p.colors) {
   });
 }
 
-      if (!nuevasImgs) return;
-
-      // Imagen principal
-      mainImg.src = nuevasImgs[0];
-
-      // Miniaturas nuevas
-      const thumbs = card.querySelector(".thumbs");
-
-      thumbs.innerHTML = nuevasImgs
-        .map((img, i) =>
-          `<img src="${img}" class="${i === 0 ? "active" : ""}">`
-        )
-        .join("");
-
-      // Reactivar eventos de las miniaturas
-      thumbs.querySelectorAll("img").forEach(t => {
-        t.onclick = () => {
-
-          thumbs.querySelectorAll("img")
-            .forEach(x => x.classList.remove("active"));
-
-          t.classList.add("active");
-          mainImg.src = t.src;
-        };
-      });
-
-    };
-
-  });
-}
     const sel=card.querySelector("select");
     const priceEl=card.querySelector(".price");
     sel.onchange=()=>priceEl.textContent=fmt(sel.value);
