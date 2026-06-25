@@ -666,21 +666,6 @@ function render(cat="all"){
 card.className="card";
 
 card.innerHTML = `
-  <div class="title">${item.title}</div>
-
-  <div class="colors">
-    ${item.colors
-      ? item.colors.map(c => `<span class="color-tag">${c}</span>`).join('')
-      : ''
-    }
-  </div>
-
-  <div class="price">
-    ${fmtARS(item.price)}
-  </div>
-
-  <button>Comprar</button>
-  
   <div class="gallery">
     <img src="${p.images[0]}" class="main-img">
     <div class="thumbs">
