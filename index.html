@@ -689,11 +689,14 @@ function render(cat="all"){
           .join("")}
       </select>
 
-      <div class="price">
-        ${fmt(firstPrice)}
-      </div>
+     <div class="price">
+  ${fmt(firstPrice)}
+</div>
 
-    </div>
+<div class="actions">
+  <button class="add-cart">Agregar</button>
+  <button class="buy">Comprar</button>
+</div>
 
     <div class="gallery">
       <img src="${imgs[0]}" class="main-img">
