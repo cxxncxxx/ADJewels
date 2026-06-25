@@ -44,6 +44,13 @@ header{background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-inde
   border-radius:20px;
   font-size:12px;
   font-weight:600;
+  cursor:pointer;
+}
+
+.color-tag.active{
+  background:#000;
+  color:#fff;
+  border:1px solid #000;
 }
   
   .verified-img{
@@ -728,7 +735,10 @@ if (p.colors) {
   card.querySelectorAll(".color-tag").forEach(tag => {
 
     tag.onclick = () => {
+card.querySelectorAll(".color-tag")
+  .forEach(x => x.classList.remove("active"));
 
+tag.classList.add("active");
       const color = tag.textContent;
 
       console.log("Color clickeado:", color);
@@ -756,7 +766,11 @@ if (p.colors) {
 
   });
 }
+const firstColor = card.querySelector(".color-tag");
 
+if(firstColor){
+  firstColor.classList.add("active");
+}
     const sel=card.querySelector("select");
     const priceEl=card.querySelector(".price");
     sel.onchange=()=>priceEl.textContent=fmt(sel.value);
