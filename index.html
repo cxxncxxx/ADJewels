@@ -864,11 +864,21 @@ if (p.colors) {
   card.querySelectorAll(".color-tag").forEach(tag => {
 
     tag.onclick = () => {
-card.querySelectorAll(".color-tag")
-  .forEach(x => x.classList.remove("active"));
 
-tag.classList.add("active");
-      const color = tag.textContent;
+  // Si ya estaba seleccionado, lo deselecciona
+  if (tag.classList.contains("active")) {
+    tag.classList.remove("active");
+    return;
+  }
+
+  // Quita la selección de los demás
+  card.querySelectorAll(".color-tag")
+    .forEach(x => x.classList.remove("active"));
+
+  // Selecciona este
+  tag.classList.add("active");
+
+  const color = tag.textContent;
 
       console.log("Color clickeado:", color);
       console.log("Imágenes:", p.colors[color]);
