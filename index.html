@@ -856,10 +856,12 @@ const imgs =
       </div>
 
       <select>
-        ${Object.entries(p.variants)
-          .map(([k,v]) => `<option value="${v}">${k}</option>`)
-          .join("")}
-      </select>
+ <option value="" selected disabled>Seleccionar talle</option>
+
+  ${Object.entries(p.variants)
+    .map(([k,v]) => `<option value="${v}">${k}</option>`)
+    .join("")}
+</select>
 
      <div class="price">
   ${fmt(firstPrice)}
@@ -944,6 +946,16 @@ if (p.colors) {
     sel.onchange=()=>priceEl.textContent=fmt(sel.value);
 
     card.querySelector(".add-cart").onclick=()=>{
+      const colorSeleccionado = card.querySelector(".color-tag.active");
+
+if(!colorSeleccionado){
+  alert("Seleccioná un color.");
+  return;
+}
+      if(sel.value === ""){
+  alert("Seleccioná un talle.");
+  return;
+}
   cart.push({
     title: p.title,
     variant: sel.options[sel.selectedIndex].text,
@@ -955,6 +967,17 @@ if (p.colors) {
 };
 
    card.querySelector(".buy").onclick = ()=>{
+     const colorSeleccionado = card.querySelector(".color-tag.active");
+
+if (!colorSeleccionado) {
+  alert("Seleccioná un color.");
+  return;
+}
+
+if (sel.value === "") {
+  alert("Seleccioná un talle.");
+  return;
+}
   const price = Number(sel.value);
 
   cart.length = 0;
