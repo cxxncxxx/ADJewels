@@ -1125,7 +1125,7 @@ if (p.colors) {
     const priceEl=card.querySelector(".price");
     sel.onchange=()=>priceEl.textContent=fmt(sel.value);
 
-    card.querySelector(".add-cart").onclick = () => {
+card.querySelector(".add-cart").onclick = () => {
 
     const tieneColores = p.colors && Object.keys(p.colors).length > 0;
 
@@ -1162,16 +1162,7 @@ if (p.colors) {
   alert("Seleccioná un talle.");
   return;
 }
-  cart.push({
-    title: p.title,
-    variant: sel.options[sel.selectedIndex].text,
-    price: sel.value,
-    image: imgs[0] // 👈 CLAVE
-  });
-  cartTotal += Number(sel.value);
-  updateCartUI();
-};
-
+ 
 card.querySelector(".buy").onclick = () => {
 
     const tieneColores = p.colors && Object.keys(p.colors).length > 0;
