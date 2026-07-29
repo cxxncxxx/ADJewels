@@ -157,7 +157,32 @@ header{background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-inde
 .title{font-weight:700}
 .price{font-weight:800}
 select{padding:8px;border-radius:8px;border:1px solid #ddd}
+#clientModal input,
+#clientModal textarea{
 
+  width:100%;
+  padding:12px;
+
+  margin-bottom:10px;
+
+  border:1px solid #ddd;
+
+  border-radius:10px;
+
+  font-family:Poppins;
+
+  font-size:14px;
+
+  box-sizing:border-box;
+}
+
+#clientModal textarea{
+
+  resize:vertical;
+
+  min-height:80px;
+}
+  
 .actions{display:flex;gap:8px;margin-top:auto}
 .buy,.add-cart{flex:1;padding:12px;border:none;border-radius:10px;font-weight:700;cursor:pointer}
 .buy{background:#000;color:#fff}
@@ -429,6 +454,50 @@ footer{text-align:center;padding:20px;color:#666}
   </div>
 </div>
 
+  <!-- DATOS DEL CLIENTE -->
+<div class="modal" id="clientModal">
+
+  <div class="modal-content">
+
+    <h3>Datos del cliente</h3>
+
+    <input id="cNombre" placeholder="Nombre y apellido *">
+
+    <input id="cTelefono" placeholder="Celular *">
+
+    <input id="cEmail" placeholder="Email (opcional)">
+
+    <input id="cProvincia" placeholder="Provincia *">
+
+    <input id="cCiudad" placeholder="Ciudad *">
+
+    <input id="cDireccion" placeholder="Dirección *">
+
+    <input id="cCP" placeholder="Código Postal *">
+
+    <input id="cDepto" placeholder="Departamento / Piso (opcional)">
+
+    <textarea
+      id="cObs"
+      placeholder="Indicaciones para el envío (opcional)"
+      rows="3"></textarea>
+
+    <div class="actions">
+
+      <button class="buy" onclick="continuarCompra()">
+        Continuar
+      </button>
+
+      <button class="add-cart" onclick="closeClientModal()">
+        Cancelar
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+  
 <!-- PRODUCTO DETALLE -->
 <div class="modal" id="productModal">
   <div class="modal-content">
@@ -1105,15 +1174,45 @@ function removeItem(i){
 
 function finalizarCarrito(){
 
-  if(!validarDijeEnCarrito()) return;
+    if(!validarDijeEnCarrito()) return;
 
+    document.getElementById("clientModal").style.display = "flex";
 
-  const msg=encodeURIComponent(
-    `🛒 Pedido AD Studio\n`+
-    cart.map(p=>`• ${p.title} (${p.variant}) - ${fmt(p.price)}`).join("\n")+
-    `\nTotal: ${fmt(cartTotal)}`
-  );
-  window.open(`https://wa.me/${WHATSAPP}?text=${msg}`,"_blank");
+}
+
+function closeClientModal(){
+
+    document.getElementById("clientModal").style.display = "none";
+
+}
+
+function continuarCompra(){
+
+    const obligatorios = [
+        "cNombre",
+        "cTelefono",
+        "cProvincia",
+        "cCiudad",
+        "cDireccion",
+        "cCP"
+    ];
+
+    for(const id of obligatorios){
+
+        const campo = document.getElementById(id);
+
+        if(campo.value.trim() === ""){
+
+            alert("Completá todos los campos obligatorios.");
+            campo.focus();
+            return;
+
+        }
+
+    }
+
+    alert("Perfecto. En el siguiente paso mostraremos el resumen del pedido.");
+
 }
 
 document.querySelectorAll(".cat-nav button").forEach(b=>{
