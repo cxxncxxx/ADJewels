@@ -1195,7 +1195,10 @@ function closeProduct(){
 function validarDijeEnCarrito(){
   return true;
 }
-
+document.getElementById("sortProducts").addEventListener("change", () => {
+    render(currentCategory);
+});
+  
 window.onload = () => {
   render();
 };
