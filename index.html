@@ -1125,20 +1125,39 @@ if (p.colors) {
     const priceEl=card.querySelector(".price");
     sel.onchange=()=>priceEl.textContent=fmt(sel.value);
 
-    card.querySelector(".add-cart").onclick=()=>{
-      const tieneColores = p.colors && Object.keys(p.colors).length > 0;
+    card.querySelector(".add-cart").onclick = () => {
 
-if (tieneColores) {
     const tieneColores = p.colors && Object.keys(p.colors).length > 0;
 
-if (tieneColores) {
-    const colorSeleccionado = card.querySelector(".color-tag.active");
+    if (tieneColores) {
 
-    if (!colorSeleccionado) {
-        alert("Seleccioná un color.");
+        const colorSeleccionado = card.querySelector(".color-tag.active");
+
+        if (!colorSeleccionado) {
+            alert("Seleccioná un color.");
+            return;
+        }
+
+    }
+
+    if (sel.value === "") {
+        alert("Seleccioná un talle.");
         return;
     }
-}
+
+    cart.push({
+        title: p.title,
+        variant: sel.options[sel.selectedIndex].text,
+        price: sel.value,
+        image: imgs[0]
+    });
+
+    cartTotal += Number(sel.value);
+
+    updateCartUI();
+
+};
+    
       if(sel.value === ""){
   alert("Seleccioná un talle.");
   return;
@@ -1153,37 +1172,47 @@ if (tieneColores) {
   updateCartUI();
 };
 
-   card.querySelector(".buy").onclick = ()=>{
-     const colorSeleccionado = card.querySelector(".color-tag.active");
+card.querySelector(".buy").onclick = () => {
 
-if (!colorSeleccionado) {
-  alert("Seleccioná un color.");
-  return;
-}
+    const tieneColores = p.colors && Object.keys(p.colors).length > 0;
 
-if (sel.value === "") {
-  alert("Seleccioná un talle.");
-  return;
-}
-  const price = Number(sel.value);
+    if (tieneColores) {
 
-  cart.length = 0;
-  cartTotal = price;
+        const colorSeleccionado = card.querySelector(".color-tag.active");
 
-  cart.push({
-    title: p.title,
-    variant: sel.options[sel.selectedIndex].text,
-    price: price,
-    image: p.images[0]
-  });
+        if (!colorSeleccionado) {
+            alert("Seleccioná un color.");
+            return;
+        }
 
-  updateCartUI();
-  openCart();
+    }
+
+    if (sel.value === "") {
+        alert("Seleccioná un talle.");
+        return;
+    }
+
+    const price = Number(sel.value);
+
+    cart.length = 0;
+    cartTotal = price;
+
+    cart.push({
+        title: p.title,
+        variant: sel.options[sel.selectedIndex].text,
+        price: price,
+        image: imgs[0]
+    });
+
+    updateCartUI();
+    openCart();
+
 };
     
 catalog.appendChild(card);
   });
-
+  }
+  
 function updateCartUI(){
   document.getElementById("cartTotal").textContent=fmt(cartTotal);
 }
