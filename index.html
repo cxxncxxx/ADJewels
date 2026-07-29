@@ -106,7 +106,34 @@ header{background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-inde
 
 .cat-nav button{border:none;background:#fff;padding:8px 14px;border-radius:20px;font-weight:600;cursor:pointer}
 .cat-nav button.active{background:#000;color:#fff}
+.sort-bar{
+  max-width:1200px;
+  margin:12px auto;
+  padding:0 10px;
+  display:flex;
+  justify-content:flex-end;
+}
 
+.sort-bar select{
+  padding:10px 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  background:#fff;
+  font-family:Poppins;
+  font-size:14px;
+  cursor:pointer;
+}
+
+@media (max-width:768px){
+  .sort-bar{
+    justify-content:center;
+  }
+
+  .sort-bar select{
+    width:100%;
+    max-width:350px;
+  }
+}
 .minimo{max-width:1200px;margin:auto;background:#fff;padding:10px;border-radius:10px;text-align:center;font-weight:600}
 
 .main{max-width:1200px;margin:auto;padding:16px}
@@ -374,6 +401,16 @@ footer{text-align:center;padding:20px;color:#666}
   <button data-cat="ropa">Ropa</button>
   <button data-cat="calzados">Calzados</button>
 </nav>
+
+<div class="sort-bar">
+    <select id="sortProducts">
+        <option value="default">⭐ Destacados</option>
+        <option value="az">🔤 Nombre (A-Z)</option>
+        <option value="za">🔠 Nombre (Z-A)</option>
+        <option value="priceAsc">💲 Precio: menor a mayor</option>
+        <option value="priceDesc">💲 Precio: mayor a menor</option>
+    </select>
+</div>
 
 </header>
 
@@ -828,9 +865,40 @@ const PRODUCTS=[
 
 const catalog=document.getElementById("catalog");
 
+let currentCategory = "all";
 function render(cat="all"){
   catalog.innerHTML="";
-  PRODUCTS.filter(p => cat === "all" || p.category === cat).forEach(p => {
+  let productos = PRODUCTS.filter(
+    p => cat === "all" || p.category === cat
+);
+
+const order = document.getElementById("sortProducts")?.value;
+
+switch(order){
+
+  case "az":
+    productos.sort((a,b)=>a.title.localeCompare(b.title));
+    break;
+
+  case "za":
+    productos.sort((a,b)=>b.title.localeCompare(a.title));
+    break;
+
+  case "priceAsc":
+    productos.sort((a,b)=>
+      Object.values(a.variants)[0] -
+      Object.values(b.variants)[0]
+    );
+    break;
+
+  case "priceDesc":
+    productos.sort((a,b)=>
+      Object.values(b.variants)[0] -
+      Object.values(a.variants)[0]
+    );
+    break;
+}
+  productos.forEach(p => {
 
   const firstPrice = Object.values(p.variants)[0];
 
@@ -1054,7 +1122,7 @@ function finalizarCarrito(){
 
 document.querySelectorAll(".cat-nav button").forEach(b=>{
   b.onclick=()=>{
-
+currentCategory = b.dataset.cat;
     // activar botón
     document.querySelectorAll(".cat-nav button")
       .forEach(x=>x.classList.remove("active"));
