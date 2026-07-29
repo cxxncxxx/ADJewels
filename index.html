@@ -841,45 +841,48 @@ const imgs =
   const card = document.createElement("div");
   card.className = "card";
 
-  card.innerHTML = `
-    <div class="meta">
+ card.innerHTML = `
 
-      <div class="title">${p.title}</div>
+  <div class="gallery">
+    <img src="${imgs[0]}" class="main-img">
 
-      <div class="colors">
-        ${p.colors
-          ? Object.keys(p.colors)
-              .map(c => `<span class="color-tag">${c}</span>`)
-              .join("")
-          : ""
-        }
-      </div>
-
-      <select>
- <option value="" selected disabled>Seleccionar talle</option>
-
-  ${Object.entries(p.variants)
-    .map(([k,v]) => `<option value="${v}">${k}</option>`)
-    .join("")}
-</select>
-
-     <div class="price">
-  ${fmt(firstPrice)}
-</div>
-
-<div class="actions">
-  <button class="add-cart">Agregar</button>
-  <button class="buy">Comprar</button>
-</div>
-
-    <div class="gallery">
-      <img src="${imgs[0]}" class="main-img">
-
-      <div class="thumbs">
-        ${imgs.map(img => `<img src="${img}">`).join("")}
-      </div>
+    <div class="thumbs">
+      ${imgs.map(img => `<img src="${img}">`).join("")}
     </div>
-  `;
+  </div>
+
+  <div class="meta">
+
+    <div class="title">${p.title}</div>
+
+    <div class="colors">
+      ${p.colors
+        ? Object.keys(p.colors)
+            .map(c => `<span class="color-tag">${c}</span>`)
+            .join("")
+        : ""
+      }
+    </div>
+
+    <select>
+      <option value="" selected disabled>Seleccionar talle</option>
+
+      ${Object.entries(p.variants)
+        .map(([k,v]) => `<option value="${v}">${k}</option>`)
+        .join("")}
+    </select>
+
+    <div class="price">
+      ${fmt(firstPrice)}
+    </div>
+
+    <div class="actions">
+      <button class="add-cart">Agregar</button>
+      <button class="buy">Comprar</button>
+    </div>
+
+  </div>
+`;
     const mainImg = card.querySelector(".main-img");
 
 mainImg.onclick = () => openProduct(p);
