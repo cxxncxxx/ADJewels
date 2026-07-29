@@ -873,7 +873,9 @@ function render(cat="all"){
 );
 
 const order = document.getElementById("sortProducts")?.value;
-
+const getMinPrice = (p) =>
+  Math.min(...Object.values(p.variants).map(Number));
+  
 switch(order){
 
   case "az":
@@ -885,17 +887,11 @@ switch(order){
     break;
 
   case "priceAsc":
-    productos.sort((a,b)=>
-      Object.values(a.variants)[0] -
-      Object.values(b.variants)[0]
-    );
+    productos.sort((a,b)=>getMinPrice(a)-getMinPrice(b));
     break;
 
   case "priceDesc":
-    productos.sort((a,b)=>
-      Object.values(b.variants)[0] -
-      Object.values(a.variants)[0]
-    );
+    productos.sort((a,b)=>getMinPrice(b)-getMinPrice(a));
     break;
 }
   productos.forEach(p => {
