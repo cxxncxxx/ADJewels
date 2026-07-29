@@ -1020,26 +1020,22 @@ const imgs =
 
  card.innerHTML = `
 
-  <div class="gallery">
-    <img src="${imgs[0]}" class="main-img">
+<img class="main-img" src="${imgs[0] || ""}">
 
-    <div class="thumbs">
-      ${imgs.map(img => `<img src="${img}">`).join("")}
-    </div>
-  </div>
+<div class="thumbs">
+  ${imgs.map(img => `<img src="${img}">`).join("")}
+</div>
 
-  <div class="meta">
+<div class="title">${p.title}</div>
 
-    <div class="title">${p.title}</div>
-
-    <div class="colors">
-      ${p.colors
-        ? Object.keys(p.colors)
-            .map(c => `<span class="color-tag">${c}</span>`)
-            .join("")
-        : ""
-      }
-    </div>
+<div class="colors">
+  ${p.colors
+    ? Object.keys(p.colors)
+        .map(c => `<span class="color-tag">${c}</span>`)
+        .join("")
+    : ""
+  }
+</div>
 
     <select>
       <option value="" selected disabled>Seleccionar talle</option>
@@ -1062,7 +1058,7 @@ const imgs =
 `;
     const mainImg = card.querySelector(".main-img");
 
-mainImg.onclick = () => openProduct(p);
+// mainImg.onclick = () => openProduct(p);
 
 // Miniaturas
 card.querySelectorAll(".thumbs img").forEach(t => {
@@ -1071,7 +1067,7 @@ card.querySelectorAll(".thumbs img").forEach(t => {
       .forEach(x => x.classList.remove("active"));
 
     t.classList.add("active");
-    mainImg.src = t.src;
+// mainImg.src = t.src;
   };
 });
 
@@ -1103,7 +1099,7 @@ if (p.colors) {
 
       if (!nuevasImgs) return;
 
-      mainImg.src = nuevasImgs[0];
+      // mainImg.src = nuevasImgs[0];
 
       const thumbs = card.querySelector(".thumbs");
 
@@ -1158,11 +1154,6 @@ card.querySelector(".add-cart").onclick = () => {
 
 };
     
-      if(sel.value === ""){
-  alert("Seleccioná un talle.");
-  return;
-}
- 
 card.querySelector(".buy").onclick = () => {
 
     const tieneColores = p.colors && Object.keys(p.colors).length > 0;
