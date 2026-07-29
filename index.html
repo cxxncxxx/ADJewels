@@ -1126,11 +1126,15 @@ if (p.colors) {
     sel.onchange=()=>priceEl.textContent=fmt(sel.value);
 
     card.querySelector(".add-cart").onclick=()=>{
-      const colorSeleccionado = card.querySelector(".color-tag.active");
+      const tieneColores = p.colors && Object.keys(p.colors).length > 0;
 
-if(!colorSeleccionado){
-  alert("Seleccioná un color.");
-  return;
+if (tieneColores) {
+    const colorSeleccionado = card.querySelector(".color-tag.active");
+
+    if (!colorSeleccionado) {
+        alert("Seleccioná un color.");
+        return;
+    }
 }
       if(sel.value === ""){
   alert("Seleccioná un talle.");
