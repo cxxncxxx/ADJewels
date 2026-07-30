@@ -1392,10 +1392,17 @@ function closeClientModal(){
 }
   
 function removeItem(i){
-  cartTotal-=Number(cart[i].price);
-  cart.splice(i,1);
-  updateCartUI();
-  openCart();
+
+    cart.splice(i,1);
+
+    cartTotal = cart.reduce(
+        (t,p)=>t+(p.price*p.quantity),0
+    );
+
+    updateCartUI();
+
+    openCart();
+
 }
 
  function increaseQty(i){
