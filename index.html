@@ -1326,18 +1326,56 @@ function continuarCompra(){
         const campo = document.getElementById(id);
 
         if(campo.value.trim() === ""){
-
             alert("Completá todos los campos obligatorios.");
             campo.focus();
             return;
-
         }
 
     }
 
+    mostrarResumen();
+
+}
+
     alert("Perfecto. En el siguiente paso mostraremos el resumen del pedido.");
 
 }
+
+  function mostrarResumen(){
+
+    closeClientModal();
+
+    const lista = document.getElementById("summaryProducts");
+    const total = document.getElementById("summaryTotal");
+
+    lista.innerHTML = "";
+
+    cart.forEach(p=>{
+
+        lista.innerHTML += `
+            <div class="summary-item">
+                <strong>${p.title}</strong><br>
+                Talle: ${p.variant}<br>
+                Precio: ${fmt(p.price)}
+                <hr>
+            </div>
+        `;
+
+    });
+
+    total.textContent = "Total: " + fmt(cartTotal);
+
+    document.getElementById("summaryModal").style.display = "flex";
+
+}
+
+function volverFormulario(){
+
+    document.getElementById("summaryModal").style.display = "none";
+    openClientModal();
+
+}
+  
 document.querySelectorAll(".cat-nav button").forEach(b=>{
   b.onclick=()=>{
 currentCategory = b.dataset.cat;
