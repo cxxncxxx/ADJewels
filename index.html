@@ -493,55 +493,56 @@ footer{text-align:center;padding:20px;color:#666}
     <h3>Tu carrito</h3>
     <div id="cartItems"></div>
     <strong id="cartModalTotal"></strong>
-    <button class="buy" onclick="finalizarCarrito()">Finalizar carrito</button>
+    <button class="buy" onclick="openClientModal()">
+    Finalizar compra
+</button>
     <button class="add-cart" onclick="closeCart()">Cerrar</button>
   </div>
 </div>
 
-  <!-- DATOS DEL CLIENTE -->
+<!-- DATOS DEL CLIENTE -->
 <div class="modal" id="clientModal">
 
-  <div class="modal-content">
+    <div class="modal-content">
 
-    <h3>Datos del cliente</h3>
+        <h3>Datos del cliente</h3>
 
-    <input id="cNombre" placeholder="Nombre y apellido *">
+        <input id="cNombre" placeholder="Nombre y apellido *">
 
-    <input id="cTelefono" placeholder="Celular *">
+        <input id="cTelefono" placeholder="Celular *">
 
-    <input id="cEmail" placeholder="Email (opcional)">
+        <input id="cEmail" placeholder="Email (opcional)">
 
-    <input id="cProvincia" placeholder="Provincia *">
+        <input id="cProvincia" placeholder="Provincia *">
 
-    <input id="cCiudad" placeholder="Ciudad *">
+        <input id="cCiudad" placeholder="Ciudad *">
 
-    <input id="cDireccion" placeholder="Dirección *">
+        <input id="cDireccion" placeholder="Dirección *">
 
-    <input id="cCP" placeholder="Código Postal *">
+        <input id="cCP" placeholder="Código Postal *">
 
-    <input id="cDepto" placeholder="Departamento / Piso (opcional)">
+        <input id="cDepto" placeholder="Departamento / Piso (opcional)">
 
-    <textarea
-      id="cObs"
-      placeholder="Indicaciones para el envío (opcional)"
-      rows="3"></textarea>
+        <textarea
+            id="cObs"
+            placeholder="Indicaciones para el envío (opcional)"
+            rows="3"></textarea>
 
-    <div class="actions">
+        <div class="actions">
 
-      <button class="buy" onclick="continuarCompra()">
-        Continuar
-      </button>
+            <button class="buy" onclick="continuarCompra()">
+                Continuar
+            </button>
 
-      <button class="add-cart" onclick="closeClientModal()">
-        Cancelar
-      </button>
+            <button class="add-cart" onclick="closeClientModal()">
+                Cancelar
+            </button>
+
+        </div>
 
     </div>
 
-  </div>
-
 </div>
-
   
   
 <!-- PRODUCTO DETALLE -->
@@ -1228,6 +1229,20 @@ function openCart(){
 }
 function closeCart(){cartModal.style.display="none"}
 
+function openClientModal(){
+
+    closeCart();
+
+    document.getElementById("clientModal").style.display = "flex";
+
+}
+
+function closeClientModal(){
+
+    document.getElementById("clientModal").style.display = "none";
+
+}
+  
 function removeItem(i){
   cartTotal-=Number(cart[i].price);
   cart.splice(i,1);
