@@ -1190,13 +1190,15 @@ card.querySelector(".add-cart").onclick = () => {
         return;
     }
 
-    cart.push({
-        title: p.title,
-        variant: sel.options[sel.selectedIndex].text,
-        price: sel.value,
-        image: imgs[0]
-    });
+    const colorSeleccionado = card.querySelector(".color-tag.active");
 
+cart.push({
+    title: p.title,
+    variant: sel.options[sel.selectedIndex].text,
+    color: colorSeleccionado ? colorSeleccionado.textContent : "Sin color",
+    price: sel.value,
+    image: imgs[0]
+});
     cartTotal += Number(sel.value);
 
     updateCartUI();
@@ -1228,12 +1230,15 @@ card.querySelector(".buy").onclick = () => {
     cart.length = 0;
     cartTotal = price;
 
-    cart.push({
-        title: p.title,
-        variant: sel.options[sel.selectedIndex].text,
-        price: price,
-        image: imgs[0]
-    });
+    const colorSeleccionado = card.querySelector(".color-tag.active");
+
+cart.push({
+    title: p.title,
+    variant: sel.options[sel.selectedIndex].text,
+    color: colorSeleccionado ? colorSeleccionado.textContent : "Sin color",
+    price: price,
+    image: imgs[0]
+});
 
     updateCartUI();
     openCart();
@@ -1408,17 +1413,21 @@ function volverFormulario(){
 
     cart.forEach((p, i) => {
 
-        mensaje += (i + 1) + ". " + p.title + "%0A";
+    mensaje += "━━━━━━━━━━━━━━━━━━%0A";
 
-        if(p.color){
-            mensaje += "🎨 Color: " + p.color + "%0A";
-        }
+    mensaje += "📦 Producto " + (i + 1) + "%0A%0A";
 
-        mensaje += "📏 Talle: " + p.variant + "%0A";
-        mensaje += "💲 " + fmt(p.price) + "%0A%0A";
+    mensaje += "🛍️ " + p.title + "%0A";
 
-    });
+    if(p.color && p.color !== "Sin color"){
+        mensaje += "🎨 Color: " + p.color + "%0A";
+    }
 
+    mensaje += "📏 Talle: " + p.variant + "%0A";
+    mensaje += "💵 Precio: " + fmt(p.price) + "%0A%0A";
+
+});
+   
     mensaje += "━━━━━━━━━━━━━━━━━━%0A";
     mensaje += "💰 *TOTAL:* " + fmt(cartTotal) + "%0A";
     mensaje += "━━━━━━━━━━━━━━━━━━%0A%0A";
