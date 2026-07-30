@@ -1371,6 +1371,49 @@ function volverFormulario(){
     openClientModal();
 
 }
+
+ function enviarPedidoWhatsapp(){
+
+    alert("La función se ejecutó.");
+
+    let mensaje = "🛒 *NUEVO PEDIDO*%0A%0A";
+
+    mensaje += "👤 *Cliente*%0A";
+    mensaje += "Nombre: " + document.getElementById("cNombre").value + "%0A";
+    mensaje += "Celular: " + document.getElementById("cTelefono").value + "%0A";
+    mensaje += "Email: " + document.getElementById("cEmail").value + "%0A";
+    mensaje += "Provincia: " + document.getElementById("cProvincia").value + "%0A";
+    mensaje += "Ciudad: " + document.getElementById("cCiudad").value + "%0A";
+    mensaje += "Dirección: " + document.getElementById("cDireccion").value + "%0A";
+    mensaje += "Código Postal: " + document.getElementById("cCP").value + "%0A";
+
+    if(document.getElementById("cDepto").value !== ""){
+        mensaje += "Departamento: " + document.getElementById("cDepto").value + "%0A";
+    }
+
+    if(document.getElementById("cObs").value !== ""){
+        mensaje += "Observaciones: " + document.getElementById("cObs").value + "%0A";
+    }
+
+    mensaje += "%0A📦 *Productos*%0A";
+
+    cart.forEach(p => {
+
+        mensaje += "• " + p.title +
+        " (" + p.variant + ")" +
+        " - " + fmt(p.price) + "%0A";
+
+    });
+
+    mensaje += "%0A💰 *TOTAL:* " + fmt(cartTotal);
+    mensaje += "%0A%0A💳 Alias para transferencia: agusdente";
+
+    window.open(
+        "https://wa.me/" + WHATSAPP + "?text=" + mensaje,
+        "_blank"
+    );
+
+}
   
 document.querySelectorAll(".cat-nav button").forEach(b=>{
   b.onclick=()=>{
