@@ -565,9 +565,14 @@ footer{text-align:center;padding:20px;color:#666}
 
             <strong id="aliasText">agusdente</strong>
 
-            <button class="buy" onclick="copiarAlias()">
-                📋 Copiar Alias
-            </button>
+           <button
+    class="buy"
+    id="copyAliasBtn"
+    onclick="copiarAlias()">
+
+    📋 Copiar Alias
+
+</button>
 
         </div>
 
@@ -1445,17 +1450,37 @@ function volverFormulario(){
 
 }
 
-  function copiarAlias(){
+ function copiarAlias(){
 
     const alias = "agusdente";
 
-    navigator.clipboard.writeText(alias)
-        .then(() => {
-            alert("✅ Alias copiado al portapapeles.");
-        })
-        .catch(() => {
-            alert("No se pudo copiar el alias.");
-        });
+    const boton = document.getElementById("copyAliasBtn");
+
+    navigator.clipboard.writeText(alias).then(()=>{
+
+        boton.textContent = "✅ ¡Alias copiado!";
+
+        boton.disabled = true;
+
+        setTimeout(()=>{
+
+            boton.textContent = "📋 Copiar Alias";
+
+            boton.disabled = false;
+
+        },2000);
+
+    }).catch(()=>{
+
+        boton.textContent = "❌ Error al copiar";
+
+        setTimeout(()=>{
+
+            boton.textContent = "📋 Copiar Alias";
+
+        },2000);
+
+    });
 
 }
   
