@@ -258,6 +258,26 @@ footer{text-align:center;padding:20px;color:#666}
   overflow-y:auto;
 }
 
+  .copy-message{
+
+    margin-top:15px;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    background:#17361d;
+
+    color:#6cff9d;
+
+    font-size:14px;
+
+    display:none;
+
+    animation:fadeIn .35s ease;
+
+}
+
 /* ===== FIX MODAL PRODUCTO MOBILE ===== */
 #productModal .modal-content{
   max-height:90vh;
@@ -573,6 +593,10 @@ footer{text-align:center;padding:20px;color:#666}
     📋 Copiar Alias
 
 </button>
+
+          <div id="copyMessage" class="copy-message">
+
+    ⚠️ Recordá realizar la transferencia y luego enviarnos el comprobante por WhatsApp para confirmar tu compra.
 
         </div>
 
@@ -1450,17 +1474,21 @@ function volverFormulario(){
 
 }
 
- function copiarAlias(){
+function copiarAlias(){
 
     const alias = "agusdente";
 
     const boton = document.getElementById("copyAliasBtn");
+
+    const aviso = document.getElementById("copyMessage");
 
     navigator.clipboard.writeText(alias).then(()=>{
 
         boton.textContent = "✅ ¡Alias copiado!";
 
         boton.disabled = true;
+
+        aviso.style.display = "block";
 
         setTimeout(()=>{
 
