@@ -1444,6 +1444,20 @@ function volverFormulario(){
     );
 
 }
+
+  function copiarAlias(){
+
+    const alias = "agusdente";
+
+    navigator.clipboard.writeText(alias)
+        .then(() => {
+            alert("✅ Alias copiado al portapapeles.");
+        })
+        .catch(() => {
+            alert("No se pudo copiar el alias.");
+        });
+
+}
   
 document.querySelectorAll(".cat-nav button").forEach(b=>{
   b.onclick=()=>{
