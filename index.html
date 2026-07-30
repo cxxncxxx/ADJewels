@@ -1283,11 +1283,14 @@ card.querySelector(".buy").onclick = () => {
     const colorSeleccionado = card.querySelector(".color-tag.active");
 
 cart.push({
+
     title: p.title,
     variant: sel.options[sel.selectedIndex].text,
     color: colorSeleccionado ? colorSeleccionado.textContent : "Sin color",
     price: price,
-    image: imgs[0]
+    image: imgs[0],
+    quantity: 1
+
 });
 
     updateCartUI();
