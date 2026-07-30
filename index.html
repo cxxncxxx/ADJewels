@@ -1374,39 +1374,60 @@ function volverFormulario(){
 
  function enviarPedidoWhatsapp(){
 
-    alert("La función se ejecutó.");
+    let mensaje = "🛒 *NUEVO PEDIDO - AD Studio*%0A";
+    mensaje += "━━━━━━━━━━━━━━━━━━%0A%0A";
 
-    let mensaje = "🛒 *NUEVO PEDIDO*%0A%0A";
-
-    mensaje += "👤 *Cliente*%0A";
+    mensaje += "👤 *DATOS DEL CLIENTE*%0A";
     mensaje += "Nombre: " + document.getElementById("cNombre").value + "%0A";
-    mensaje += "Celular: " + document.getElementById("cTelefono").value + "%0A";
-    mensaje += "Email: " + document.getElementById("cEmail").value + "%0A";
-    mensaje += "Provincia: " + document.getElementById("cProvincia").value + "%0A";
-    mensaje += "Ciudad: " + document.getElementById("cCiudad").value + "%0A";
-    mensaje += "Dirección: " + document.getElementById("cDireccion").value + "%0A";
-    mensaje += "Código Postal: " + document.getElementById("cCP").value + "%0A";
+    mensaje += "📞 Celular: " + document.getElementById("cTelefono").value + "%0A";
+
+    if(document.getElementById("cEmail").value !== ""){
+        mensaje += "📧 Email: " + document.getElementById("cEmail").value + "%0A";
+    }
+
+    mensaje += "📍 " +
+        document.getElementById("cCiudad").value + ", " +
+        document.getElementById("cProvincia").value + "%0A";
+
+    mensaje += "🏠 Dirección: " +
+        document.getElementById("cDireccion").value + "%0A";
+
+    mensaje += "📮 Código Postal: " +
+        document.getElementById("cCP").value + "%0A";
 
     if(document.getElementById("cDepto").value !== ""){
-        mensaje += "Departamento: " + document.getElementById("cDepto").value + "%0A";
+        mensaje += "🏢 Depto/Piso: " + document.getElementById("cDepto").value + "%0A";
     }
 
     if(document.getElementById("cObs").value !== ""){
-        mensaje += "Observaciones: " + document.getElementById("cObs").value + "%0A";
+        mensaje += "📝 Observaciones: " + document.getElementById("cObs").value + "%0A";
     }
 
-    mensaje += "%0A📦 *Productos*%0A";
+    mensaje += "%0A━━━━━━━━━━━━━━━━━━%0A%0A";
+    mensaje += "📦 *PRODUCTOS*%0A%0A";
 
-    cart.forEach(p => {
+    cart.forEach((p, i) => {
 
-        mensaje += "• " + p.title +
-        " (" + p.variant + ")" +
-        " - " + fmt(p.price) + "%0A";
+        mensaje += (i + 1) + ". " + p.title + "%0A";
+
+        if(p.color){
+            mensaje += "🎨 Color: " + p.color + "%0A";
+        }
+
+        mensaje += "📏 Talle: " + p.variant + "%0A";
+        mensaje += "💲 " + fmt(p.price) + "%0A%0A";
 
     });
 
-    mensaje += "%0A💰 *TOTAL:* " + fmt(cartTotal);
-    mensaje += "%0A%0A💳 Alias para transferencia: agusdente";
+    mensaje += "━━━━━━━━━━━━━━━━━━%0A";
+    mensaje += "💰 *TOTAL:* " + fmt(cartTotal) + "%0A";
+    mensaje += "━━━━━━━━━━━━━━━━━━%0A%0A";
+
+    mensaje += "💳 *TRANSFERENCIA*%0A";
+    mensaje += "Alias: *agusdente*%0A%0A";
+
+    mensaje += "📎 El cliente enviará el comprobante de transferencia por este chat.%0A";
+    mensaje += "¡Muchas gracias por tu compra! ❤️";
 
     window.open(
         "https://wa.me/" + WHATSAPP + "?text=" + mensaje,
