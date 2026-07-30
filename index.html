@@ -547,47 +547,47 @@ footer{text-align:center;padding:20px;color:#666}
  <!-- RESUMEN DEL PEDIDO -->
 <div class="modal" id="summaryModal">
 
-  <div class="modal-content">
+    <div class="modal-content">
 
-    <h3>Resumen del pedido</h3>
+        <h3>Resumen del pedido</h3>
 
-    <div id="summaryProducts"></div>
+        <div id="summaryProducts"></div>
 
-    <hr>
+        <hr>
 
-    <h2 id="summaryTotal"></h2>
+        <h2 id="summaryTotal"></h2>
 
-    <div class="transfer-box">
+        <div class="transfer-box">
 
-      <h4>Transferencia Bancaria</h4>
+            <h4>Transferencia Bancaria</h4>
 
-      <p>Alias:</p>
+            <p>Alias:</p>
 
-      <strong id="aliasText">agusdente</strong>
+            <strong id="aliasText">agusdente</strong>
 
-      <button class="buy" onclick="copiarAlias()">
-        📋 Copiar Alias
-      </button>
+            <button class="buy" onclick="copiarAlias()">
+                📋 Copiar Alias
+            </button>
+
+        </div>
+
+        <p style="margin-top:20px">
+            Una vez realizada la transferencia, enviá el comprobante por WhatsApp.
+        </p>
+
+        <div class="actions">
+
+            <button class="add-cart" onclick="volverFormulario()">
+                Volver
+            </button>
+
+            <button class="buy" onclick="enviarPedidoWhatsapp()">
+                Enviar pedido
+            </button>
+
+        </div>
 
     </div>
-
-    <p style="margin-top:20px">
-      Una vez realizada la transferencia, enviá el comprobante por WhatsApp.
-    </p>
-
-    <div class="actions">
-
-      <button class="add-cart" onclick="volverFormulario()">
-        Volver
-      </button>
-
-      <button class="buy" onclick="enviarPedidoWhatsapp()">
-        Enviar pedido
-      </button>
-
-    </div>
-
-  </div>
 
 </div>
   
